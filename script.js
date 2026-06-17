@@ -7,6 +7,7 @@ let mode = 'flashcard';
 let flipped = false;
 let answered = false;
 let score = { correct: 0, total: 0 };
+let sessionStart = null;
 
 // DOM
 const loaderEl    = document.getElementById('loader');
@@ -44,6 +45,13 @@ const mcExplanation       = document.getElementById('mc-explanation');
 const mcExplanationText   = document.getElementById('mc-explanation-text');
 const mcExplanationSource = document.getElementById('mc-explanation-source');
 const mcExplanationLink   = document.getElementById('mc-explanation-link');
+const cardAreaEl      = document.getElementById('card-area');
+const navEl           = document.getElementById('nav');
+const summaryEl       = document.getElementById('summary');
+const summaryScoreEl  = document.getElementById('summary-score');
+const summaryVerdictEl = document.getElementById('summary-verdict');
+const summaryTimeEl   = document.getElementById('summary-time');
+const retryBtn        = document.getElementById('retry-btn');
 
 // ── Constants ──────────────────────────────────────────
 
@@ -176,6 +184,10 @@ function setMode(newMode) {
   btnFlashcard.classList.toggle('active', mode === 'flashcard');
   btnMc.classList.toggle('active', mode === 'mc');
 
+  summaryEl.hidden = true;
+  cardAreaEl.hidden = false;
+  navEl.hidden = false;
+
   if (mode === 'flashcard') {
     deck = shuffle([...allCards]);
     fcView.hidden = false;
@@ -188,6 +200,7 @@ function setMode(newMode) {
     scoreArea.hidden = false;
     score = { correct: 0, total: 0 };
     updateScore();
+    sessionStart = Date.now();
   }
 
   currentIndex = 0;
@@ -200,6 +213,10 @@ prevBtn.addEventListener('click', () => navigate(-1));
 nextBtn.addEventListener('click', () => navigate(1));
 
 function navigate(dir) {
+  if (dir > 0 && mode === 'mc' && currentIndex === deck.length - 1 && answered) {
+    showSummary();
+    return;
+  }
   const next = currentIndex + dir;
   if (next < 0 || next >= deck.length) return;
   currentIndex = next;
@@ -212,13 +229,21 @@ function render() {
   const card = deck[currentIndex];
   counter.textContent = `${currentIndex + 1} / ${deck.length}`;
   prevBtn.disabled = currentIndex === 0;
-  nextBtn.disabled = currentIndex === deck.length - 1;
 
   if (mode === 'flashcard') {
     renderFlashcard(card);
   } else {
     renderMC(card);
   }
+
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const isLast = currentIndex === deck.length - 1;
+  const canFinish = mode === 'mc' && isLast && answered;
+  nextBtn.disabled = isLast && !canFinish;
+  nextBtn.textContent = canFinish ? 'View Results' : 'Next →';
 }
 
 function renderFlashcard(card) {
@@ -302,6 +327,7 @@ function selectChoice(selected, correct) {
   mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
   mcFeedback.className = isCorrect ? 'correct' : 'wrong';
   showExplanation(deck[currentIndex], mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
+  updateNextBtn();
 }
 
 checkBtn.addEventListener('click', () => {
@@ -335,6 +361,7 @@ function submitMultiSelect(card, selectedIndices) {
   mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — correct answers are highlighted';
   mcFeedback.className   = isCorrect ? 'correct'  : 'wrong';
   showExplanation(card, mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
+  updateNextBtn();
 }
 
 function updateScore() {
@@ -391,3 +418,33 @@ function shuffle(arr) {
   }
   return arr;
 }
+
+function formatTime(ms) {
+  const s = Math.round(ms / 1000);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+}
+
+// ── Summary ────────────────────────────────────────────
+
+function showSummary() {
+  const pct = score.total > 0 ? Math.round(score.correct / score.total * 100) : 0;
+  summaryScoreEl.textContent = `${score.correct} / ${score.total} (${pct}%)`;
+  summaryTimeEl.textContent = formatTime(Date.now() - sessionStart);
+
+  const passMark = deckMeta && deckMeta.passMark != null ? deckMeta.passMark : null;
+  if (passMark === null) {
+    summaryVerdictEl.hidden = true;
+  } else {
+    const passed = pct >= passMark;
+    summaryVerdictEl.textContent = passed ? 'Passed' : 'Failed';
+    summaryVerdictEl.className = `summary-verdict ${passed ? 'pass' : 'fail'}`;
+    summaryVerdictEl.hidden = false;
+  }
+
+  cardAreaEl.hidden = true;
+  navEl.hidden = true;
+  scoreArea.hidden = true;
+  summaryEl.hidden = false;
+}
+
+retryBtn.addEventListener('click', () => setMode('mc'));
