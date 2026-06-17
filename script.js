@@ -432,13 +432,13 @@ function showSummary() {
   summaryTimeEl.textContent = formatTime(Date.now() - sessionStart);
 
   const passMark = deckMeta && deckMeta.passMark != null ? deckMeta.passMark : null;
-  if (passMark !== null) {
+  if (passMark === null) {
+    summaryVerdictEl.hidden = true;
+  } else {
     const passed = pct >= passMark;
     summaryVerdictEl.textContent = passed ? 'Passed' : 'Failed';
     summaryVerdictEl.className = `summary-verdict ${passed ? 'pass' : 'fail'}`;
     summaryVerdictEl.hidden = false;
-  } else {
-    summaryVerdictEl.hidden = true;
   }
 
   cardAreaEl.hidden = true;
