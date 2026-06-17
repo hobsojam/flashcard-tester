@@ -1,0 +1,470 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f0f2f5;
+  color: #111827;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* ── Loader ───────────────────────────────────────────── */
+
+#loader {
+  max-width: 480px;
+  margin: 5rem auto;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 2px dashed transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+#loader.drag-over {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+#loader h1 {
+  font-size: 2rem;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+#loader > p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.file-btn {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.file-btn:hover {
+  background: #1d4ed8;
+}
+
+.file-btn input {
+  display: none;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 1rem;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  min-height: 1.2rem;
+}
+
+/* ── App shell ────────────────────────────────────────── */
+
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: #2563eb;
+}
+
+#reload-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 0.85rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+#reload-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+/* ── Deck meta ────────────────────────────────────────── */
+
+#deck-meta {
+  margin-bottom: 1.25rem;
+}
+
+.deck-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.25rem;
+}
+
+#deck-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+#deck-description {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.45;
+}
+
+.difficulty-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.difficulty-badge.beginner {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.difficulty-badge.intermediate {
+  background: #fef9c3;
+  color: #92400e;
+}
+
+.difficulty-badge.advanced {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* ── Mode selector ────────────────────────────────────── */
+
+#mode-selector {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1.5rem;
+  background: white;
+  padding: 4px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mode-btn.active {
+  background: #2563eb;
+  color: white;
+}
+
+.mode-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* ── Flashcard ────────────────────────────────────────── */
+
+#flashcard-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card {
+  width: 100%;
+  height: 260px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-front {
+  background: white;
+  font-weight: 500;
+}
+
+.card-back {
+  background: #2563eb;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+#reveal-btn {
+  background: none;
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+#reveal-btn:hover {
+  background: #2563eb;
+  color: white;
+}
+
+/* ── Multiple choice ──────────────────────────────────── */
+
+#mc-view {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mc-question {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.55;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+#choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.choice-btn {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.choice-btn:hover:not(:disabled) {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.choice-btn:disabled {
+  cursor: default;
+}
+
+.choice-btn.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+#check-btn {
+  margin-top: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 1.5rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+#check-btn:hover {
+  background: #1d4ed8;
+}
+
+#mc-select-hint {
+  margin-bottom: 0.5rem;
+  margin-top: -0.5rem;
+}
+
+.choice-btn.correct {
+  border-color: #16a34a;
+  background: #f0fdf4;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.choice-btn.wrong {
+  border-color: #dc2626;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+#mc-feedback {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  min-height: 1.4rem;
+}
+
+#mc-feedback.correct {
+  color: #16a34a;
+}
+
+#mc-feedback.wrong {
+  color: #dc2626;
+}
+
+/* ── Navigation ───────────────────────────────────────── */
+
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+#nav button {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+#nav button:hover:not(:disabled) {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+#nav button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+#counter {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* ── Explanation ──────────────────────────────────────── */
+
+.explanation {
+  background: #f0f9ff;
+  border-left: 3px solid #2563eb;
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.55;
+  width: 100%;
+  text-align: left;
+}
+
+.source-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #bfdbfe;
+  font-size: 0.82rem;
+}
+
+.source-label {
+  color: #9ca3af;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.explanation a {
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.explanation a:hover {
+  text-decoration: underline;
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+
+#site-footer {
+  text-align: center;
+  margin-top: 2.5rem;
+  color: #9ca3af;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+/* ── Score ────────────────────────────────────────────── */
+
+#score-area {
+  text-align: center;
+  margin-top: 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

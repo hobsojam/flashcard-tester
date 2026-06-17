@@ -1,0 +1,15 @@
+# Claude Code internal files
+.claude/
+CLAUDE.md
+
+# Card decks — content is separate from software; keep your decks local
+flashcards/
+*-cards.json
+cards-*.json
+
+# Screenshots and loose media
+screenshot-loader.png
+
+# OS generated files
+.DS_Store
+Thumbs.db

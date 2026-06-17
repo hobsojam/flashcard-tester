@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard Tester</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loader">
+    <h1>Flashcard Tester</h1>
+    <p>Load a card deck to get started</p>
+    <label class="file-btn">
+      Load Cards
+      <input type="file" id="file-input" accept=".json">
+    </label>
+    <p class="hint">or drag and drop a .json file here</p>
+    <p id="load-error" class="error"></p>
+  </div>
+
+  <div id="app" hidden>
+    <header>
+      <h1>Flashcard Tester</h1>
+      <button id="reload-btn">Load New Deck</button>
+    </header>
+
+    <div id="deck-meta" hidden>
+      <div class="deck-meta-row">
+        <span id="deck-title"></span>
+        <span id="deck-difficulty" class="difficulty-badge" hidden></span>
+      </div>
+      <p id="deck-description" hidden></p>
+    </div>
+
+    <div id="mode-selector">
+      <button id="btn-flashcard" class="mode-btn active">Flashcard</button>
+      <button id="btn-mc" class="mode-btn">Multiple Choice</button>
+    </div>
+
+    <div id="card-area">
+
+      <div id="flashcard-view">
+        <div id="card" class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <p id="fc-question"></p>
+            </div>
+            <div class="card-back">
+              <p id="fc-answer"></p>
+            </div>
+          </div>
+        </div>
+        <button id="reveal-btn">Reveal Answer</button>
+        <p class="hint">Click card or press Space to flip</p>
+        <div id="fc-explanation" class="explanation" hidden>
+          <p id="fc-explanation-text"></p>
+          <p id="fc-explanation-source" class="source-line" hidden>
+            <span class="source-label">Source</span>
+            <a id="fc-explanation-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+          </p>
+        </div>
+      </div>
+
+      <div id="mc-view" hidden>
+        <div class="mc-question">
+          <p id="mc-question"></p>
+        </div>
+        <p id="mc-select-hint" class="hint" hidden>Select all that apply</p>
+        <div id="choices"></div>
+        <button id="check-btn" hidden>Check Answer</button>
+        <p id="mc-feedback"></p>
+        <div id="mc-explanation" class="explanation" hidden>
+          <p id="mc-explanation-text"></p>
+          <p id="mc-explanation-source" class="source-line" hidden>
+            <span class="source-label">Source</span>
+            <a id="mc-explanation-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="nav">
+      <button id="prev-btn">&#8592; Prev</button>
+      <span id="counter"></span>
+      <button id="next-btn">Next &#8594;</button>
+    </div>
+
+    <div id="score-area" hidden>
+      <span id="score-display"></span>
+    </div>
+  </div>
+
+  <footer id="site-footer">
+    Please use responsibly. All card content is loaded locally by the user and is entirely their own responsibility.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
