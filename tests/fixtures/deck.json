@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "Test Deck",
+    "difficulty": "beginner"
+  },
+  "cards": [
+    {
+      "question": "What is 2 + 2?",
+      "answer": 1,
+      "choices": ["3", "4", "5", "6"],
+      "explanation": "Basic arithmetic."
+    },
+    {
+      "question": "Who wrote Hamlet?",
+      "answer": "William Shakespeare"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "flashcard-tester",
+  "version": "1.0.0",
+  "description": "A lightweight client-side learning tool. No install, no server, no account — open `index.html` in a browser and go.",
+  "main": "script.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hobsojam/flashcard-tester.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hobsojam/flashcard-tester/issues"
+  },
+  "homepage": "https://github.com/hobsojam/flashcard-tester#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "serve": "^14.2.6"
+  }
+}

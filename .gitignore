@@ -10,6 +10,13 @@ cards-*.json
 # Screenshots and loose media
 screenshot-loader.png
 
+# Playwright output
+playwright-report/
+test-results/
+
+# Node
+node_modules/
+
 # OS generated files
 .DS_Store
 Thumbs.db
