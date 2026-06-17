@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "title": "Multi-Select Test Deck"
+  },
+  "cards": [
+    {
+      "question": "Which are even numbers?",
+      "answer": [0, 2],
+      "choices": ["2", "3", "4", "5"],
+      "explanation": "2 and 4 are even."
+    }
+  ]
+}
