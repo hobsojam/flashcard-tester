@@ -468,3 +468,69 @@ header h1 {
   color: #6b7280;
   font-size: 0.9rem;
 }
+
+/* ── Summary ──────────────────────────────────────────── */
+
+.summary-card {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.summary-heading {
+  font-size: 1.4rem;
+  color: #111827;
+  margin-bottom: 1.25rem;
+}
+
+#summary-score {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.75rem;
+}
+
+.summary-verdict {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.summary-verdict.pass {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.summary-verdict.fail {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.summary-meta {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+
+#retry-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+#retry-btn:hover {
+  background: #1d4ed8;
+}

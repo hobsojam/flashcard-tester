@@ -35,6 +35,12 @@
           "type": "string",
           "description": "The licence under which this card deck is published. Recommended: 'CC BY 4.0' for openly shared decks. Use a standard SPDX identifier or Creative Commons short-form (e.g. 'CC BY 4.0', 'CC BY-SA 4.0', 'CC0-1.0').",
           "examples": ["CC BY 4.0", "CC BY-SA 4.0", "CC BY-NC 4.0", "CC0-1.0"]
+        },
+        "passMark": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Minimum percentage score (1–100) required to pass. When set, the end-of-session summary shows a Passed or Failed verdict."
         }
       }
     },

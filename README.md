@@ -14,7 +14,7 @@ A lightweight client-side learning tool. No install, no server, no account — o
 Click the card (or press **Space**) to flip and reveal the answer. Use arrow keys or Prev / Next to navigate.
 
 ### Multiple Choice
-Choose from up to four options. Feedback is immediate. Your score is tracked for the session.
+Choose from up to four options. Feedback is immediate. Your score is tracked for the session. When you reach the last card a **View Results** summary shows your score, time taken, and a Passed / Failed verdict if the deck defines a `passMark`.
 
 ### Multi-Select
 Questions with more than one correct answer show a **Select all that apply** prompt. Toggle your choices then click **Check Answer**.
@@ -64,6 +64,7 @@ Cards live in a `.json` file you load locally. The file is never uploaded anywhe
 | `description` | string | Subtitle shown below the title |
 | `difficulty` | string | `beginner`, `intermediate`, or `advanced` — shown as a colour-coded badge |
 | `tags` | string[] | For your own organisation; not displayed in the app |
+| `passMark` | integer (1–100) | Minimum % score to pass. When set, the end-of-session summary shows Passed or Failed |
 
 #### `cards` (required)
 
