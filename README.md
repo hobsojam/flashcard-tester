@@ -5,7 +5,7 @@ A lightweight client-side learning tool. No install, no server, no account — o
 ## Getting Started
 
 1. Open `index.html` in Chrome, Edge, or Firefox
-2. Click **Load Cards** (or drag and drop a `.json` file)
+2. Click **Load Cards** and select `example-cards.json` to try the bundled sample deck, or load your own
 3. Choose a mode and start studying
 
 ## Modes
