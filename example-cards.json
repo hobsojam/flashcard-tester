@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "title": "Example Deck",
+    "description": "A sample deck bundled with Flashcard Tester to help you get started.",
+    "difficulty": "beginner",
+    "license": "CC BY 4.0"
+  },
+  "cards": [
+    {
+      "question": "What is the capital of France?",
+      "answer": 2,
+      "choices": [
+        "London",
+        "Berlin",
+        "Paris",
+        "Madrid"
+      ]
+    },
+    {
+      "question": "What does HTML stand for?",
+      "answer": 0,
+      "choices": [
+        "HyperText Markup Language",
+        "HighText Machine Language",
+        "HyperTool Multi Language",
+        "HomeTool Markup Language"
+      ]
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "answer": 1,
+      "choices": [
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn"
+      ]
+    },
+    {
+      "question": "Who wrote Hamlet?",
+      "answer": "William Shakespeare"
+    },
+    {
+      "question": "What is 7 × 8?",
+      "answer": 2,
+      "choices": [
+        "48",
+        "54",
+        "56",
+        "64"
+      ]
+    },
+    {
+      "question": "In which year did World War II end?",
+      "answer": 2,
+      "choices": [
+        "1943",
+        "1944",
+        "1945",
+        "1946"
+      ]
+    },
+    {
+      "question": "What is the chemical symbol for gold?",
+      "answer": 1,
+      "choices": [
+        "Ag",
+        "Au",
+        "Gd",
+        "Go"
+      ]
+    },
+    {
+      "question": "Which language runs natively in the browser?",
+      "answer": 2,
+      "choices": [
+        "Python",
+        "Java",
+        "JavaScript",
+        "Ruby"
+      ]
+    },
+    {
+      "question": "What is the speed of light (approximate)?",
+      "answer": 1,
+      "choices": [
+        "30,000 km/s",
+        "300,000 km/s",
+        "3,000,000 km/s",
+        "3,000 km/s"
+      ]
+    },
+    {
+      "question": "What year did the first moon landing occur?",
+      "answer": "1969"
+    }
+  ]
+}

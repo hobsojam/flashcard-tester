@@ -5,7 +5,7 @@ A lightweight client-side learning tool. No install, no server, no account — o
 ## Getting Started
 
 1. Open `index.html` in Chrome, Edge, or Firefox
-2. Click **Load Cards** (or drag and drop a `.json` file)
+2. Click **Load Cards** and select `example-cards.json` to try the bundled sample deck, or load your own
 3. Choose a mode and start studying
 
 ## Modes
@@ -108,7 +108,7 @@ The app enforces these limits on load:
 - Cards without `choices` are flashcard-only; cards with `choices` work in all three modes
 - Choices are shuffled on each session in single-answer mode; order is preserved in multi-select
 - Progress resets on reload — there is no saved state
-- A JSON Schema for the card format is provided in `card-schema.json` — editors like VS Code will give you autocomplete and validation if you add `"$schema": "./card-schema.json"` to your deck file
+- A JSON Schema for the card format is provided in `card-schema.json` — editors like VS Code will give you autocomplete and validation if you add `"$schema": "./card-schema.json"` to your deck file. The schema includes a fully worked example showing all fields including `meta` and `license`
 
 ---
 

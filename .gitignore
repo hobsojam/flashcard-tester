@@ -6,6 +6,7 @@ CLAUDE.md
 flashcards/
 *-cards.json
 cards-*.json
+!example-cards.json
 
 # Screenshots and loose media
 screenshot-loader.png
