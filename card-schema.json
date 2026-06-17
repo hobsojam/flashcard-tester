@@ -92,6 +92,13 @@
   },
   "examples": [
     {
+      "meta": {
+        "title": "Example Deck",
+        "description": "A sample deck showing all three card types.",
+        "difficulty": "beginner",
+        "tags": ["example"],
+        "license": "CC BY 4.0"
+      },
       "cards": [
         {
           "question": "What is the capital of France?",
