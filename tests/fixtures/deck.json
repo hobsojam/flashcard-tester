@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Test Deck",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "license": "CC BY 4.0"
   },
   "cards": [
     {
