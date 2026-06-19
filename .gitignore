@@ -21,3 +21,7 @@ node_modules/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Dependencies and test output
+node_modules/
+test-results/
