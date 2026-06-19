@@ -8,6 +8,8 @@ let flipped = false;
 let answered = false;
 let score = { correct: 0, total: 0 };
 let sessionStart = null;
+let results = [];    // null | 'correct' | 'wrong' per card
+let selections = []; // selected answer per card (string for single, number[] for multi)
 
 // DOM
 const loaderEl    = document.getElementById('loader');
@@ -52,6 +54,7 @@ const summaryScoreEl  = document.getElementById('summary-score');
 const summaryVerdictEl = document.getElementById('summary-verdict');
 const summaryTimeEl   = document.getElementById('summary-time');
 const retryBtn        = document.getElementById('retry-btn');
+const questionGridEl  = document.getElementById('question-grid');
 
 // ── Constants ──────────────────────────────────────────
 
@@ -199,6 +202,8 @@ function setMode(newMode) {
     mcView.hidden = false;
     scoreArea.hidden = false;
     score = { correct: 0, total: 0 };
+    results = new Array(deck.length).fill(null);
+    selections = new Array(deck.length).fill(null);
     updateScore();
     sessionStart = Date.now();
   }
@@ -234,6 +239,7 @@ function render() {
     renderFlashcard(card);
   } else {
     renderMC(card);
+    renderQuestionGrid();
   }
 
   updateNextBtn();
@@ -256,7 +262,8 @@ function renderFlashcard(card) {
 }
 
 function renderMC(card) {
-  answered = false;
+  const wasAnswered = results[currentIndex] !== null;
+  answered = wasAnswered;
   mcQuestion.textContent = card.question;
   mcFeedback.textContent = '';
   mcFeedback.className = '';
@@ -289,6 +296,37 @@ function renderMC(card) {
       choicesEl.appendChild(btn);
     });
   }
+
+  if (wasAnswered) applyAnsweredState(card, isMulti);
+}
+
+function applyAnsweredState(card, isMulti) {
+  const sel = selections[currentIndex];
+  const isCorrect = results[currentIndex] === 'correct';
+
+  if (isMulti) {
+    const correctSet = new Set(card.answer);
+    const selectedSet = new Set(sel);
+    choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.disabled = true;
+      const idx = parseInt(btn.dataset.index);
+      if (correctSet.has(idx))   btn.classList.add('correct');
+      else if (selectedSet.has(idx)) btn.classList.add('wrong');
+    });
+    checkBtn.hidden = true;
+    mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — correct answers are highlighted';
+  } else {
+    const correct = answerText(card);
+    choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.textContent === correct) btn.classList.add('correct');
+      if (btn.textContent === sel && sel !== correct) btn.classList.add('wrong');
+    });
+    mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
+  }
+
+  mcFeedback.className = isCorrect ? 'correct' : 'wrong';
+  showExplanation(card, mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
 }
 
 // ── Flashcard interactions ─────────────────────────────
@@ -316,6 +354,8 @@ function selectChoice(selected, correct) {
 
   const isCorrect = selected === correct;
   if (isCorrect) score.correct++;
+  results[currentIndex] = isCorrect ? 'correct' : 'wrong';
+  selections[currentIndex] = selected;
   updateScore();
 
   choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
@@ -327,6 +367,7 @@ function selectChoice(selected, correct) {
   mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
   mcFeedback.className = isCorrect ? 'correct' : 'wrong';
   showExplanation(deck[currentIndex], mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
+  renderQuestionGrid();
   updateNextBtn();
 }
 
@@ -348,6 +389,8 @@ function submitMultiSelect(card, selectedIndices) {
                       card.answer.every(i => selectedSet.has(i));
 
   if (isCorrect) score.correct++;
+  results[currentIndex] = isCorrect ? 'correct' : 'wrong';
+  selections[currentIndex] = selectedIndices;
   updateScore();
 
   choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
@@ -361,11 +404,29 @@ function submitMultiSelect(card, selectedIndices) {
   mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — correct answers are highlighted';
   mcFeedback.className   = isCorrect ? 'correct'  : 'wrong';
   showExplanation(card, mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
+  renderQuestionGrid();
   updateNextBtn();
 }
 
 function updateScore() {
   scoreDisplay.textContent = `Score: ${score.correct} / ${score.total}`;
+}
+
+function renderQuestionGrid() {
+  questionGridEl.innerHTML = '';
+  deck.forEach((_, i) => {
+    const chip = document.createElement('button');
+    chip.className = 'q-chip';
+    chip.textContent = i + 1;
+    const state = results[i] ?? 'unanswered';
+    chip.classList.add(state);
+    if (i === currentIndex) chip.classList.add('current');
+    chip.addEventListener('click', () => {
+      currentIndex = i;
+      render();
+    });
+    questionGridEl.appendChild(chip);
+  });
 }
 
 // ── Keyboard shortcuts ─────────────────────────────────
