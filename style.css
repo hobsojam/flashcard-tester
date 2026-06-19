@@ -465,10 +465,22 @@ header h1 {
 /* ── Score ────────────────────────────────────────────── */
 
 #score-area {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
   margin-top: 1rem;
   color: #6b7280;
   font-size: 0.9rem;
+}
+
+#timer-display {
+  font-variant-numeric: tabular-nums;
+}
+
+#timer-display.timer-low {
+  color: #dc2626;
+  font-weight: 600;
 }
 
 /* ── Summary ──────────────────────────────────────────── */
