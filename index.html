@@ -89,12 +89,15 @@
 
     <div id="score-area" hidden>
       <div id="question-grid"></div>
-      <span id="score-display"></span>
+      <div class="score-row">
+        <span id="score-display"></span>
+        <span id="timer-display" hidden></span>
+      </div>
     </div>
 
     <div id="summary" hidden>
       <div class="summary-card">
-        <h2 class="summary-heading">Session Complete</h2>
+        <h2 id="summary-heading" class="summary-heading">Session Complete</h2>
         <p id="summary-score" class="summary-score"></p>
         <p id="summary-verdict" class="summary-verdict" hidden></p>
         <p class="summary-meta">Time taken: <span id="summary-time"></span></p>

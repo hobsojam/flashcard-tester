@@ -474,6 +474,13 @@ header h1 {
   font-size: 0.9rem;
 }
 
+.score-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+}
+
 /* ── Question grid ────────────────────────────────────── */
 
 #question-grid {
@@ -514,6 +521,15 @@ header h1 {
 
 .q-chip.current {
   box-shadow: 0 0 0 2px #111827;
+}
+
+#timer-display {
+  font-variant-numeric: tabular-nums;
+}
+
+#timer-display.timer-low {
+  color: #dc2626;
+  font-weight: 600;
 }
 
 /* ── Summary ──────────────────────────────────────────── */

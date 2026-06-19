@@ -10,6 +10,8 @@ let score = { correct: 0, total: 0 };
 let sessionStart = null;
 let results = [];    // null | 'correct' | 'wrong' per card
 let selections = []; // selected answer per card (string for single, number[] for multi)
+let timerInterval = null;
+let timeRemaining = 0;
 
 // DOM
 const loaderEl    = document.getElementById('loader');
@@ -50,11 +52,13 @@ const mcExplanationLink   = document.getElementById('mc-explanation-link');
 const cardAreaEl      = document.getElementById('card-area');
 const navEl           = document.getElementById('nav');
 const summaryEl       = document.getElementById('summary');
+const summaryHeadingEl = document.getElementById('summary-heading');
 const summaryScoreEl  = document.getElementById('summary-score');
 const summaryVerdictEl = document.getElementById('summary-verdict');
 const summaryTimeEl   = document.getElementById('summary-time');
 const retryBtn        = document.getElementById('retry-btn');
 const questionGridEl  = document.getElementById('question-grid');
+const timerDisplayEl  = document.getElementById('timer-display');
 
 // ── Constants ──────────────────────────────────────────
 
@@ -168,6 +172,7 @@ function startApp() {
 }
 
 reloadBtn.addEventListener('click', () => {
+  clearTimer();
   appEl.hidden = true;
   loaderEl.hidden = false;
   fileInput.value = '';
@@ -183,6 +188,7 @@ btnFlashcard.addEventListener('click', () => setMode('flashcard'));
 btnMc.addEventListener('click', () => setMode('mc'));
 
 function setMode(newMode) {
+  clearTimer();
   mode = newMode;
   btnFlashcard.classList.toggle('active', mode === 'flashcard');
   btnMc.classList.toggle('active', mode === 'mc');
@@ -206,6 +212,7 @@ function setMode(newMode) {
     selections = new Array(deck.length).fill(null);
     updateScore();
     sessionStart = Date.now();
+    if (deckMeta && deckMeta.timeLimitSeconds) startTimer(deckMeta.timeLimitSeconds);
   }
 
   currentIndex = 0;
@@ -429,6 +436,37 @@ function renderQuestionGrid() {
   });
 }
 
+// ── Session timer ──────────────────────────────────────
+
+function startTimer(seconds) {
+  timeRemaining = seconds;
+  timerDisplayEl.hidden = false;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+    updateTimerDisplay();
+    if (timeRemaining <= 0) timeExpired();
+  }, 1000);
+}
+
+function clearTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerDisplayEl.hidden = true;
+  timerDisplayEl.classList.remove('timer-low');
+}
+
+function updateTimerDisplay() {
+  timerDisplayEl.textContent = `Time: ${formatTime(timeRemaining * 1000)}`;
+  timerDisplayEl.classList.toggle('timer-low', timeRemaining <= 60);
+}
+
+function timeExpired() {
+  clearTimer();
+  score.total = deck.length;
+  showSummary(true);
+}
+
 // ── Keyboard shortcuts ─────────────────────────────────
 
 document.addEventListener('keydown', e => {
@@ -487,7 +525,9 @@ function formatTime(ms) {
 
 // ── Summary ────────────────────────────────────────────
 
-function showSummary() {
+function showSummary(timedOut = false) {
+  clearTimer();
+  summaryHeadingEl.textContent = timedOut ? "Time's Up!" : 'Session Complete';
   const pct = score.total > 0 ? Math.round(score.correct / score.total * 100) : 0;
   summaryScoreEl.textContent = `${score.correct} / ${score.total} (${pct}%)`;
   summaryTimeEl.textContent = formatTime(Date.now() - sessionStart);
