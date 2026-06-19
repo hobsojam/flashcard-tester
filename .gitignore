@@ -1,5 +1,6 @@
-# Claude Code internal files
-.claude/
+# Claude Code internal files — track commands, ignore everything else
+.claude/*
+!.claude/commands/
 CLAUDE.md
 
 # Card decks — content is separate from software; keep your decks local

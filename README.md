@@ -65,6 +65,7 @@ Cards live in a `.json` file you load locally. The file is never uploaded anywhe
 | `difficulty` | string | `beginner`, `intermediate`, or `advanced` — shown as a colour-coded badge |
 | `tags` | string[] | For your own organisation; not displayed in the app |
 | `passMark` | integer (1–100) | Minimum % score to pass. When set, the end-of-session summary shows Passed or Failed |
+| `timeLimitSeconds` | integer | Multiple choice only. Adds a countdown timer for the whole session. When time expires, unanswered questions are scored as wrong and the session ends automatically |
 
 #### `cards` (required)
 
@@ -103,6 +104,22 @@ The app enforces these limits on load:
 |-----|--------|
 | `←` / `→` | Previous / next card |
 | `Space` | Flip card (flashcard mode) |
+
+## Generating Decks with Claude Code
+
+If you use [Claude Code](https://claude.ai/code), a `/make-deck` skill is included in this repo that generates a ready-to-use deck JSON from a topic description or pasted study material.
+
+```
+/make-deck braze certified developer
+```
+
+The skill produces valid JSON matching the card format above, with `passMark` set automatically, plausible distractors on every question, and an explanation on every card. Save the output as a `.json` file and drag it into the app.
+
+To include a session time limit, mention it in your prompt:
+
+```
+/make-deck AWS Solutions Architect — 130 minute time limit
+```
 
 ## Tips
 
