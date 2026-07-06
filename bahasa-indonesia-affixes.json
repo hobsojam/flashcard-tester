@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "title": "Bahasa Indonesia Affixes",
+    "description": "Multiple-choice deck testing the grammatical function of common Indonesian prefixes, suffixes, and circumfixes using real example words.",
+    "difficulty": "intermediate",
+    "passMark": 70
+  },
+  "cards": [
+    {
+      "question": "Prefix 'me-' in 'menulis' (from 'tulis', meaning 'write') indicates which grammatical function?",
+      "answer": 1,
+      "choices": [
+        "Passive voice - the action is done to the subject",
+        "Active voice - the subject performs the action",
+        "A noun referring to a person",
+        "Command/imperative form"
+      ],
+      "explanation": "The me- prefix (meN-) forms active transitive verbs, marking the subject as the one performing the action: 'menulis' = 'to write'."
+    },
+    {
+      "question": "Prefix 'di-' in 'ditulis' (from 'tulis', meaning 'write') indicates what?",
+      "answer": 1,
+      "choices": [
+        "Active voice, subject performs the action",
+        "Passive voice - the action is done to the subject",
+        "Reciprocal action between two parties",
+        "Superlative degree"
+      ],
+      "explanation": "The di- prefix forms the passive voice: 'ditulis' means 'is written' or 'was written (by someone)'."
+    },
+    {
+      "question": "Prefix 'ber-' in 'bekerja' (from 'kerja', meaning 'work') functions to...",
+      "answer": 1,
+      "choices": [
+        "form a passive verb meaning 'to be worked'",
+        "form an intransitive verb meaning 'to work / be engaged in work'",
+        "form a noun meaning 'worker'",
+        "form a causative verb meaning 'to make someone work'"
+      ],
+      "explanation": "Ber- typically forms intransitive verbs expressing a state or activity the subject is engaged in, without a direct object: 'bekerja' = 'to work'."
+    },
+    {
+      "question": "Prefix 'ter-' in 'terbuka' (from 'buka', meaning 'open') most often conveys...",
+      "answer": 2,
+      "choices": [
+        "an intentional, deliberate action",
+        "a command to open something",
+        "an unintentional/accidental result or resulting state - 'accidentally opened / already open'",
+        "a repeated action"
+      ],
+      "explanation": "Ter- frequently marks an unintended action or a resultant state, distinguishing it from the deliberate active form 'membuka' (to open something on purpose)."
+    },
+    {
+      "question": "Prefix 'per-' in 'perbaiki' (from 'baik', meaning 'good') functions as...",
+      "answer": 0,
+      "choices": [
+        "a causative marker meaning 'to make good / fix, improve'",
+        "a passive marker meaning 'to be made good by someone'",
+        "an agent noun marker meaning 'the good one'",
+        "a plural marker"
+      ],
+      "explanation": "Per- (often combined with -i as perbaiki) is causative, turning the adjective 'baik' (good) into a verb meaning 'to fix/improve'."
+    },
+    {
+      "question": "Suffix '-kan' in 'siapkan' (from 'siap', meaning 'ready') adds what meaning?",
+      "answer": 1,
+      "choices": [
+        "reflexive - 'to make oneself ready'",
+        "causative/benefactive - 'to prepare (something) for someone'",
+        "past tense marker",
+        "plural marker"
+      ],
+      "explanation": "-kan is a causative/benefactive suffix, turning 'siap' (ready) into 'siapkan' meaning 'prepare something (for someone)'."
+    },
+    {
+      "question": "Suffix '-i' in 'mengunjungi' (from 'kunjung', meaning 'visit') typically indicates...",
+      "answer": 1,
+      "choices": [
+        "a one-time, completed action",
+        "a locative/repetitive action directed at an object - 'to visit (a place/person, thoroughly or repeatedly)'",
+        "a noun form meaning 'visitor'",
+        "the passive voice"
+      ],
+      "explanation": "The -i suffix often marks a locative or iterative sense, indicating the action is directed thoroughly or repeatedly at its object, as in 'mengunjungi' (to visit)."
+    },
+    {
+      "question": "Circumfix 'ke-...-an' in 'kesehatan' (from 'sehat', meaning 'healthy') forms...",
+      "answer": 1,
+      "choices": [
+        "a verb meaning 'to heal'",
+        "an abstract noun meaning 'health' (a state/condition/quality)",
+        "an adjective meaning 'very healthy'",
+        "a plural noun meaning 'healthy people'"
+      ],
+      "explanation": "Ke-...-an turns an adjective into an abstract noun describing a state or quality: 'sehat' (healthy) becomes 'kesehatan' (health)."
+    },
+    {
+      "question": "Circumfix 'pe-...-an' in 'pendidikan' (from 'didik', meaning 'educate') forms...",
+      "answer": 0,
+      "choices": [
+        "a noun describing the process/result of educating - 'education'",
+        "an adjective meaning 'educated'",
+        "an agent noun meaning 'educator'",
+        "a passive verb meaning 'to be educated'"
+      ],
+      "explanation": "Pe-...-an forms nouns describing a process or its result: 'mendidik' (to educate) becomes 'pendidikan' (education)."
+    },
+    {
+      "question": "Prefix 'se-' in 'serumah' (from 'rumah', meaning 'house') conveys the meaning...",
+      "answer": 1,
+      "choices": [
+        "many houses",
+        "the same/one house, i.e., living in the same household",
+        "no house / homeless",
+        "a beautiful house"
+      ],
+      "explanation": "Se- means 'one' or 'the same', so 'serumah' means sharing the same house/household."
+    },
+    {
+      "question": "Prefix 'memper-' in 'mempercepat' (from 'cepat', meaning 'fast') indicates...",
+      "answer": 0,
+      "choices": [
+        "a causative verb meaning 'to speed up / make faster'",
+        "a passive verb meaning 'to be sped up by someone'",
+        "an adjective meaning 'very fast'",
+        "a noun meaning 'speed'"
+      ],
+      "explanation": "Memper- is a causative prefix combining meN- and per-, turning the adjective 'cepat' (fast) into a verb meaning 'to make faster/accelerate'."
+    },
+    {
+      "question": "Prefix 'pe-' in 'penulis' (from 'tulis', meaning 'write') forms...",
+      "answer": 1,
+      "choices": [
+        "a verb meaning 'to write repeatedly'",
+        "an agent noun meaning 'writer' - the person who does the action",
+        "an abstract noun meaning 'the act of writing'",
+        "a passive verb meaning 'to be written'"
+      ],
+      "explanation": "Pe- forms agent nouns denoting the doer of an action: 'penulis' = 'writer', the person who writes."
+    },
+    {
+      "question": "Suffix '-an' in 'makanan' (from 'makan', meaning 'eat') forms...",
+      "answer": 1,
+      "choices": [
+        "a verb meaning 'to eat repeatedly'",
+        "a noun meaning 'food' - the result/object of the verb",
+        "an adjective meaning 'edible'",
+        "an agent noun meaning 'eater'"
+      ],
+      "explanation": "-an is a nominalizing suffix that often names the object or result of a verb: 'makan' (eat) becomes 'makanan' (food)."
+    },
+    {
+      "question": "Circumfix 'per-...-an' in 'perusahaan' (from 'usaha', meaning 'effort/business') forms...",
+      "answer": 1,
+      "choices": [
+        "a verb meaning 'to try hard'",
+        "an abstract/institutional noun meaning 'company/enterprise'",
+        "an adjective meaning 'hardworking'",
+        "an agent noun meaning 'entrepreneur'"
+      ],
+      "explanation": "Per-...-an forms abstract or institutional nouns: 'usaha' (effort/business) becomes 'perusahaan' (company/enterprise)."
+    },
+    {
+      "question": "Prefix 'ter-' in 'terbaik' (from 'baik', meaning 'good') here functions as a marker of...",
+      "answer": 1,
+      "choices": [
+        "the passive voice",
+        "the superlative degree - 'the best'",
+        "an accidental action",
+        "a plural noun"
+      ],
+      "explanation": "Beyond its accidental/resultative use, ter- also forms superlatives with adjectives: 'baik' (good) becomes 'terbaik' (the best)."
+    }
+  ]
+}

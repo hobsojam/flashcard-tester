@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "title": "Bahasa Indonesia Affixes — Batch 2",
+    "description": "A second multiple-choice deck covering combined and less common Indonesian affixes (ber-...-an, memper-...-kan/-i, di-...-i/-kan, ordinal ke-/per-, -nya, -wan/-wati) with real example words.",
+    "difficulty": "advanced",
+    "passMark": 70
+  },
+  "cards": [
+    {
+      "question": "Circumfix 'ber-...-an' in 'bersalaman' (from 'salam', meaning 'greeting') expresses...",
+      "answer": 1,
+      "choices": [
+        "a single person greeting themselves",
+        "a reciprocal action - people shaking hands / greeting each other",
+        "a passive action of being greeted",
+        "an abstract noun meaning 'greeting ceremony'"
+      ],
+      "explanation": "Ber-...-an often marks reciprocal actions performed mutually by two or more parties: 'bersalaman' means to shake hands with one another."
+    },
+    {
+      "question": "Circumfix 'memper-...-kan' in 'mempersiapkan' (from 'siap', meaning 'ready') indicates...",
+      "answer": 1,
+      "choices": [
+        "a passive verb meaning 'to be readied by someone'",
+        "a causative verb meaning 'to prepare/get something ready (often thoroughly, for a purpose)'",
+        "an adjective meaning 'well-prepared'",
+        "a noun meaning 'preparation stage'"
+      ],
+      "explanation": "Memper-...-kan combines the causative memper- with -kan to intensify the causative sense: 'mempersiapkan' means to actively prepare something."
+    },
+    {
+      "question": "Circumfix 'di-...-i' in 'dikunjungi' (from 'kunjung', meaning 'visit') indicates...",
+      "answer": 1,
+      "choices": [
+        "active voice - someone is visiting",
+        "passive voice with a locative sense - 'to be visited (by someone)'",
+        "a command - 'go visit!'",
+        "an agent noun - 'the visitor'"
+      ],
+      "explanation": "Di- marks the passive voice, and combined with -i it retains the locative sense of the base verb: 'dikunjungi' means 'to be visited'."
+    },
+    {
+      "question": "Circumfix 'di-...-kan' in 'disiapkan' (from 'siap', meaning 'ready') indicates...",
+      "answer": 1,
+      "choices": [
+        "active causative - 'to prepare something'",
+        "passive causative - 'to be prepared (by someone)'",
+        "reciprocal action between two people",
+        "superlative degree"
+      ],
+      "explanation": "Di- forms the passive counterpart of causative meN-...-kan verbs, so 'disiapkan' means 'to be prepared (by someone)'."
+    },
+    {
+      "question": "Prefix 'ke-' in 'ketiga' (from 'tiga', meaning 'three') here functions to...",
+      "answer": 1,
+      "choices": [
+        "form an abstract noun meaning 'threeness'",
+        "form an ordinal number - 'third'",
+        "form a passive verb",
+        "form a plural noun meaning 'threes'"
+      ],
+      "explanation": "Ke- attached to a cardinal number produces its ordinal form: 'tiga' (three) becomes 'ketiga' (third)."
+    },
+    {
+      "question": "The word 'pertama' (meaning 'first') uses 'per-' in the same ordinal-forming role as which pattern?",
+      "answer": 1,
+      "choices": [
+        "'ber-', forming an intransitive verb",
+        "'ke-', forming an ordinal number (e.g., 'ketiga' = third)",
+        "'di-', forming a passive verb",
+        "'se-', forming a 'same as' meaning"
+      ],
+      "explanation": "'Pertama' is an irregular ordinal ('first') built with per- rather than ke-, but it serves the same ordinal-number function as ke- does in words like 'ketiga'."
+    },
+    {
+      "question": "Suffix '-nya' in 'rumahnya' (from 'rumah', meaning 'house') most likely means...",
+      "answer": 2,
+      "choices": [
+        "houses (plural)",
+        "a small house",
+        "his/her house, or 'the house' (marking possession or definiteness)",
+        "to build a house"
+      ],
+      "explanation": "-nya is a versatile suffix marking third-person possession or definiteness: 'rumahnya' means 'his/her house' or, in context, 'the house'."
+    },
+    {
+      "question": "Combination 'se-...-nya' in 'sebisanya' (from 'bisa', meaning 'can/able') expresses...",
+      "answer": 1,
+      "choices": [
+        "an ordinal number",
+        "'to the best of one's ability / as much as one can'",
+        "a passive voice",
+        "a plural noun"
+      ],
+      "explanation": "Se-...-nya on an ability word forms an idiomatic 'as ... as possible' construction: 'sebisanya' means 'to the best of one's ability'."
+    },
+    {
+      "question": "Circumfix 'ke-...-an' in 'kehujanan' (from 'hujan', meaning 'rain') here conveys...",
+      "answer": 1,
+      "choices": [
+        "an abstract noun meaning 'the concept of rain'",
+        "being accidentally caught in the rain (an unintended, unfortunate experience)",
+        "a command to make it rain",
+        "an adjective meaning 'rainy season'"
+      ],
+      "explanation": "With certain weather/misfortune words, ke-...-an takes on an accidental/adversative sense rather than forming an abstract noun: 'kehujanan' means to get caught in the rain."
+    },
+    {
+      "question": "Circumfix 'memper-...-i' in 'mempelajari' (from 'ajar', meaning 'teach/learn') indicates...",
+      "answer": 1,
+      "choices": [
+        "a passive verb meaning 'to be taught'",
+        "a causative/thorough verb meaning 'to study/learn something in depth'",
+        "an agent noun meaning 'teacher'",
+        "a reciprocal action between teacher and student"
+      ],
+      "explanation": "Memper-...-i intensifies the base and directs it thoroughly at an object: 'mempelajari' means 'to study something in depth'."
+    },
+    {
+      "question": "Prefix 'pe-' in 'pemarah' (from 'marah', meaning 'angry') describes...",
+      "answer": 1,
+      "choices": [
+        "a one-time act of getting angry",
+        "a person with a habitually short temper - 'a hot-tempered person'",
+        "a passive verb meaning 'to be angered'",
+        "an abstract noun meaning 'anger management'"
+      ],
+      "explanation": "Pe- attached to certain adjectives forms nouns describing a person with that trait as a habitual characteristic: 'pemarah' means a hot-tempered person."
+    },
+    {
+      "question": "Suffix '-wan' in 'wartawan' (from 'warta', meaning 'news/information') forms a noun meaning...",
+      "answer": 1,
+      "choices": [
+        "'newspaper' (the object)",
+        "'journalist' (a person associated with news)",
+        "'to report the news' (a verb)",
+        "'newsworthy' (an adjective)"
+      ],
+      "explanation": "-wan (borrowed from Sanskrit) forms nouns denoting a person associated with or skilled in the root concept: 'wartawan' means 'journalist'."
+    },
+    {
+      "question": "Suffix '-wati' in 'peragawati' (from 'peraga', meaning 'demonstrator/display') forms a noun meaning...",
+      "answer": 1,
+      "choices": [
+        "'fashion show' (an event)",
+        "'female model' (the feminine counterpart to '-wan')",
+        "'to model clothing' (a verb)",
+        "'modeling agency' (an abstract institution)"
+      ],
+      "explanation": "-wati is the feminine counterpart of -wan, forming nouns for women associated with the root concept: 'peragawati' means 'female model'."
+    },
+    {
+      "question": "Circumfix 'ber-...-an' in 'berjatuhan' (from 'jatuh', meaning 'fall') expresses...",
+      "answer": 1,
+      "choices": [
+        "a single, deliberate fall",
+        "multiple things falling one after another / scattered falling",
+        "a passive verb meaning 'to be dropped'",
+        "an abstract noun meaning 'gravity'"
+      ],
+      "explanation": "Beyond reciprocal meaning, ber-...-an can also mark a plural or scattered occurrence of an action: 'berjatuhan' describes many things falling one after another."
+    },
+    {
+      "question": "Combination 'ter-...-kan' in 'terselesaikan' (from 'selesai', meaning 'finished') expresses...",
+      "answer": 1,
+      "choices": [
+        "an ongoing, incomplete process",
+        "something that has been resolved/finished, often without deliberate effort or as a final outcome",
+        "a command to finish something",
+        "an agent noun meaning 'the finisher'"
+      ],
+      "explanation": "Ter- combined with a -kan causative base gives a resultative/potential passive sense: 'terselesaikan' means 'resolved/gets finished', often implying it happened eventually or without full deliberate control."
+    }
+  ]
+}
