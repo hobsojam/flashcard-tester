@@ -287,9 +287,11 @@ function renderMC(card) {
       btn.className = 'choice-btn';
       btn.textContent = choice;
       btn.dataset.index = i;
+      btn.setAttribute('aria-pressed', 'false');
       btn.addEventListener('click', () => {
         if (answered) return;
-        btn.classList.toggle('selected');
+        const nowSelected = btn.classList.toggle('selected');
+        btn.setAttribute('aria-pressed', String(nowSelected));
       });
       choicesEl.appendChild(btn);
     });
@@ -317,8 +319,13 @@ function applyAnsweredState(card, isMulti) {
     choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
       btn.disabled = true;
       const idx = parseInt(btn.dataset.index);
-      if (correctSet.has(idx))   btn.classList.add('correct');
-      else if (selectedSet.has(idx)) btn.classList.add('wrong');
+      if (correctSet.has(idx)) {
+        btn.classList.add('correct');
+        btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
+      } else if (selectedSet.has(idx)) {
+        btn.classList.add('wrong');
+        btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
+      }
     });
     checkBtn.hidden = true;
     mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — correct answers are highlighted';
@@ -326,8 +333,14 @@ function applyAnsweredState(card, isMulti) {
     const correct = answerText(card);
     choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
       btn.disabled = true;
-      if (btn.textContent === correct) btn.classList.add('correct');
-      if (btn.textContent === sel && sel !== correct) btn.classList.add('wrong');
+      if (btn.textContent === correct) {
+        btn.classList.add('correct');
+        btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
+      }
+      if (btn.textContent === sel && sel !== correct) {
+        btn.classList.add('wrong');
+        btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
+      }
     });
     mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
   }
@@ -367,8 +380,14 @@ function selectChoice(selected, correct) {
 
   choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
     btn.disabled = true;
-    if (btn.textContent === correct) btn.classList.add('correct');
-    if (btn.textContent === selected && !isCorrect) btn.classList.add('wrong');
+    if (btn.textContent === correct) {
+      btn.classList.add('correct');
+      btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
+    }
+    if (btn.textContent === selected && !isCorrect) {
+      btn.classList.add('wrong');
+      btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
+    }
   });
 
   mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
@@ -403,8 +422,13 @@ function submitMultiSelect(card, selectedIndices) {
   choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
     btn.disabled = true;
     const idx = parseInt(btn.dataset.index);
-    if (correctSet.has(idx))                      btn.classList.add('correct');
-    else if (selectedSet.has(idx))                btn.classList.add('wrong');
+    if (correctSet.has(idx)) {
+      btn.classList.add('correct');
+      btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
+    } else if (selectedSet.has(idx)) {
+      btn.classList.add('wrong');
+      btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
+    }
   });
 
   checkBtn.hidden = true;
