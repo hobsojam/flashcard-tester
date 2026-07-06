@@ -309,6 +309,17 @@ function renderMC(card) {
   if (wasAnswered) applyAnsweredState(card, isMulti);
 }
 
+function markChoiceButton(btn, isCorrectChoice, isWrongSelectedChoice) {
+  btn.disabled = true;
+  if (isCorrectChoice) {
+    btn.classList.add('correct');
+    btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
+  } else if (isWrongSelectedChoice) {
+    btn.classList.add('wrong');
+    btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
+  }
+}
+
 function applyAnsweredState(card, isMulti) {
   const sel = selections[currentIndex];
   const isCorrect = results[currentIndex] === 'correct';
@@ -317,30 +328,15 @@ function applyAnsweredState(card, isMulti) {
     const correctSet = new Set(card.answer);
     const selectedSet = new Set(sel);
     choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
-      btn.disabled = true;
       const idx = parseInt(btn.dataset.index);
-      if (correctSet.has(idx)) {
-        btn.classList.add('correct');
-        btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
-      } else if (selectedSet.has(idx)) {
-        btn.classList.add('wrong');
-        btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
-      }
+      markChoiceButton(btn, correctSet.has(idx), selectedSet.has(idx));
     });
     checkBtn.hidden = true;
     mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — correct answers are highlighted';
   } else {
     const correct = answerText(card);
     choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
-      btn.disabled = true;
-      if (btn.textContent === correct) {
-        btn.classList.add('correct');
-        btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
-      }
-      if (btn.textContent === sel && sel !== correct) {
-        btn.classList.add('wrong');
-        btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
-      }
+      markChoiceButton(btn, btn.textContent === correct, btn.textContent === sel);
     });
     mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
   }
@@ -378,21 +374,7 @@ function selectChoice(selected, correct) {
   selections[currentIndex] = selected;
   updateScore();
 
-  choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
-    btn.disabled = true;
-    if (btn.textContent === correct) {
-      btn.classList.add('correct');
-      btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
-    }
-    if (btn.textContent === selected && !isCorrect) {
-      btn.classList.add('wrong');
-      btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
-    }
-  });
-
-  mcFeedback.textContent = isCorrect ? 'Correct!' : `Incorrect — the answer is: ${correct}`;
-  mcFeedback.className = isCorrect ? 'correct' : 'wrong';
-  showExplanation(deck[currentIndex], mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
+  applyAnsweredState(deck[currentIndex], false);
   renderQuestionGrid();
   updateNextBtn();
 }
@@ -409,32 +391,16 @@ function submitMultiSelect(card, selectedIndices) {
   answered = true;
   score.total++;
 
-  const correctSet  = new Set(card.answer);
   const selectedSet = new Set(selectedIndices);
-  const isCorrect   = card.answer.length === selectedIndices.length &&
-                      card.answer.every(i => selectedSet.has(i));
+  const isCorrect    = card.answer.length === selectedIndices.length &&
+                       card.answer.every(i => selectedSet.has(i));
 
   if (isCorrect) score.correct++;
   results[currentIndex] = isCorrect ? 'correct' : 'wrong';
   selections[currentIndex] = selectedIndices;
   updateScore();
 
-  choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
-    btn.disabled = true;
-    const idx = parseInt(btn.dataset.index);
-    if (correctSet.has(idx)) {
-      btn.classList.add('correct');
-      btn.setAttribute('aria-label', `${btn.textContent} (correct answer)`);
-    } else if (selectedSet.has(idx)) {
-      btn.classList.add('wrong');
-      btn.setAttribute('aria-label', `${btn.textContent} (your answer, incorrect)`);
-    }
-  });
-
-  checkBtn.hidden = true;
-  mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — correct answers are highlighted';
-  mcFeedback.className   = isCorrect ? 'correct'  : 'wrong';
-  showExplanation(card, mcExplanation, mcExplanationText, mcExplanationSource, mcExplanationLink);
+  applyAnsweredState(card, true);
   renderQuestionGrid();
   updateNextBtn();
 }
