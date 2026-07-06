@@ -3,6 +3,8 @@ const path = require('path');
 
 const DECK  = path.join(__dirname, 'fixtures/deck.json');
 const MULTI = path.join(__dirname, 'fixtures/multi.json');
+const TIMED = path.join(__dirname, 'fixtures/timed.json');
+const PASSMARK = path.join(__dirname, 'fixtures/passmark.json');
 
 async function loadDeck(page, fixturePath) {
   await page.locator('#file-input').setInputFiles(fixturePath);
@@ -147,4 +149,92 @@ test('multi-select: wrong selection highlights correct answers', async ({ page }
   await expect(page.getByRole('button', { name: '2' })).toHaveClass(/correct/);
   await expect(page.getByRole('button', { name: '4' })).toHaveClass(/correct/);
   await expect(page.getByRole('button', { name: '3' })).toHaveClass(/wrong/);
+});
+
+// ── Keyboard shortcuts ──────────────────────────────────────
+
+test('space flips the flashcard', async ({ page }) => {
+  await loadDeck(page, DECK);
+  await expect(page.locator('#card')).not.toHaveClass(/flipped/);
+  await page.keyboard.press(' ');
+  await expect(page.locator('#card')).toHaveClass(/flipped/);
+});
+
+test('arrow keys navigate cards', async ({ page }) => {
+  await loadDeck(page, DECK);
+  await expect(page.locator('#counter')).toContainText('1 /');
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('#counter')).toContainText('2 /');
+  await page.keyboard.press('ArrowLeft');
+  await expect(page.locator('#counter')).toContainText('1 /');
+});
+
+// ── Question grid ───────────────────────────────────────────
+
+test('question grid chip jumps to that question', async ({ page }) => {
+  await loadDeck(page, MULTI);
+  await page.locator('#btn-mc').click();
+  await page.locator('.q-chip', { hasText: '1' }).click();
+  await expect(page.locator('#counter')).toContainText('1 /');
+});
+
+// ── Timer and pass mark ──────────────────────────────────────
+// PASSMARK/TIMED decks have 2 cards; MC mode shuffles card and choice
+// order, so tests answer by looking up the correct/wrong choice text
+// for whichever question is currently showing, rather than assuming order.
+
+const QA_MAP = {
+  'What is 2 + 2?': { correct: '4', wrong: '3' },
+  'What is 3 + 3?': { correct: '6', wrong: '5' },
+};
+
+async function answerCurrent(page, wantCorrect) {
+  const questionText = (await page.locator('#mc-question').textContent()).trim();
+  const { correct, wrong } = QA_MAP[questionText];
+  await page.getByRole('button', { name: wantCorrect ? correct : wrong, exact: true }).click();
+}
+
+test('timer expiring shows the summary as timed out', async ({ page }) => {
+  await loadDeck(page, TIMED);
+  await page.locator('#btn-mc').click();
+  await expect(page.locator('#timer-display')).toBeVisible();
+  await expect(page.locator('#summary')).toBeHidden();
+  await expect(page.locator('#summary-heading')).toHaveText("Time's Up!", { timeout: 5000 });
+});
+
+test('pass mark shows Passed verdict when score meets it', async ({ page }) => {
+  await loadDeck(page, PASSMARK);
+  await page.locator('#btn-mc').click();
+  await answerCurrent(page, true);
+  await page.locator('#next-btn').click();
+  await answerCurrent(page, true);
+  await page.locator('#next-btn').click();
+  await expect(page.locator('#summary')).toBeVisible();
+  await expect(page.locator('#summary-verdict')).toHaveText('Passed');
+});
+
+test('pass mark shows Failed verdict when score misses it', async ({ page }) => {
+  await loadDeck(page, PASSMARK);
+  await page.locator('#btn-mc').click();
+  await answerCurrent(page, false);
+  await page.locator('#next-btn').click();
+  await answerCurrent(page, false);
+  await page.locator('#next-btn').click();
+  await expect(page.locator('#summary')).toBeVisible();
+  await expect(page.locator('#summary-verdict')).toHaveText('Failed');
+});
+
+// ── Retry ────────────────────────────────────────────────────
+
+test('retry button restarts MC mode with a reset score', async ({ page }) => {
+  await loadDeck(page, MULTI);
+  await page.locator('#btn-mc').click();
+  await page.getByRole('button', { name: '2' }).click();
+  await page.getByRole('button', { name: '4' }).click();
+  await page.locator('#check-btn').click();
+  await page.locator('#next-btn').click();
+  await expect(page.locator('#summary')).toBeVisible();
+  await page.locator('#retry-btn').click();
+  await expect(page.locator('#summary')).toBeHidden();
+  await expect(page.locator('#score-display')).toHaveText('Score: 0 / 0');
 });

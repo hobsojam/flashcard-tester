@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "Timed Test Deck",
+    "timeLimitSeconds": 2
+  },
+  "cards": [
+    {
+      "question": "What is 2 + 2?",
+      "answer": 1,
+      "choices": ["3", "4", "5", "6"]
+    },
+    {
+      "question": "What is 3 + 3?",
+      "answer": 1,
+      "choices": ["5", "6", "7", "8"]
+    }
+  ]
+}
