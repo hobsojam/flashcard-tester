@@ -19,6 +19,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci --ignore-scripts
+      - run: npm audit
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test
       - uses: actions/upload-artifact@v7
